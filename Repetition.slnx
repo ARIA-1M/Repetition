@@ -1,0 +1,7 @@
+<Solution>
+  <Configurations>
+    <Platform Name="x64" />
+    <Platform Name="x86" />
+  </Configurations>
+  <Project Path="Repetition/Repetition.vcxproj" Id="77e29c00-b4cd-4df9-b6b3-816c6c815c07" />
+</Solution>
