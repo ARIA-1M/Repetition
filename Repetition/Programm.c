@@ -2,7 +2,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <windows.h>
+#include <string.h>
 
+// Сдвиг массива в лево на k
 int* Shift(int* count) {
 	int* array = calloc(100, sizeof(int));
 	printf("Введите длину массива: ");
@@ -27,8 +29,51 @@ int* Shift(int* count) {
 		int new_pos = (i + k) % *count;
 		temp[i] = array[new_pos];
 	}
-
+	getchar();
 	return temp;
+}
+
+void reverse_substring(char* start, char* end) {
+	while (start < end) {
+		char temp = *start;
+		*start = *end;
+		*end = temp;
+		start++;
+		end--;
+	}
+}
+
+// Обратный порядок слов в предложении
+void  ReverseOrder() {
+	char* str = calloc(100, sizeof(char));
+	
+	printf("\nВведите предложение: ");
+	fgets(str, 256, stdin);
+
+	int len = strlen(str);
+	if (str[len - 1] == '\n') {
+		str[len - 1] = '\0';
+		len--;
+	}
+
+	//  Разворачиваем всю строку
+	reverse_substring(str, str + len - 1);
+
+	char* word_start = str;
+	char* current = str;
+	while (*current != '\0') {
+		if (*current == ' ') {
+			// Нашли конец слова
+			reverse_substring(word_start, current - 1);
+			word_start = current + 1;
+		}
+		current++;
+	}
+	// Разворачиваем последнее слово
+	reverse_substring(word_start, current - 1);
+
+	printf("\nРезультат: %s", str);
+
 }
 
 
@@ -46,6 +91,8 @@ int main() {
 		printf("%d ", array[i]);
 		
 	}
+
+	ReverseOrder();
 }
 
-// Сдвиг массива в лево на k
+
